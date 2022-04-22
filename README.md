@@ -28,35 +28,33 @@ This will require a minimum of five (5) different accounts on four services. So 
 
 The good news is most of these are free. They are also easy to use.
 
-# Recommended platforms
-
 ## Hosting
 
-### Github Pages
+### Github Pages (zero dollars)
 
 Github is a platform used by software engineers to to develop code collaboratively. It also can host websites, neat! Here's how to set one up.
 
 1. Create an account on Github.
-2. Add a domain (more on this later) through Settings => Pages => Add a domain
+2. Fork this repository by clicking the icon that says fork.
+3. When you see a screen looking similar to this one again, click the little gear that says Settings
+4. In the left menu that says Code and automation, click Pages
+5. Under Source, from the pulldown select `main` and click Save
+6. After a moment there should be a link to a URL where you can view this website, like, right now
+
+(optional) Add a custom domain name
+8. Add a domain (more on this in the DNS chapter) through Settings => Pages => Add a domain
   1. Type a domain where you can read and write records.
   2. Follow the instructions on the screen (depends on existing DNS hosting).
   3. Click Verify. The warning that it may take 24 hours was not relevant for my first attempt. It took about 5 minutes.
-3. [Follow the instructions](https://docs.github.com/en/pages/quickstart) to make a new repository.
-4. When you pick a theme (should I pick a theme and just say that's the correct one?) click commit for the default page to be published.
+[Read the docs for more info on how Pages work, if you're curious](https://docs.github.com/en/pages/quickstart)
 
-From the Github UI...edit file button.
+### Squarespace (non-zero dollars)
 
-This could be a fork-and-replace process since it's running Jekyll behind the scenes on every commit.
-
-a normal HTML file can be added to the Jekyll site. so can a default theme. The Github quickstart is just an example renderer.
-
-### Squarespace
-
-This seems to be popular too. I haven't used it so can't be the best voice here.
+This seems to be popular too. I haven't used it so can't be the best voice here. Perhaps someone else can write up Squarespace docs.
 
 ## Video Streaming
 
-### Audience delivery with ok.ru (free)
+### Audience delivery with ok.ru (zero dollars)
 
 this site doesn't seem to have any limits on how many users can view an embedded video. Neat!
 Give a custom name to a profile:
@@ -65,7 +63,7 @@ Not sure how to make a persistent URL for each stream. restream seems to make dy
 
 the embed links to https://ok.ru/live/3674825825876 which is how it worked when I had the link on keep notes but I think this URL changes each time  :(
 
-### Delivery proxy with Restream.io ( 4 hours a week free )
+### Delivery proxy with Restream.io ( 4 hours a week for zero dollars )
 
 Restream sits between OBS and the audience. For a considerably higher amount of money, it can also do audience delivery. More on that later. It makes it easy to add a single stream key to OBS in a set-it-and-forget-it way. After that it will rebroadcast (restream, get it?!) to a multitude of other popular platforms like Twitch and Facebook. We're not concerned about these basic-ass platforms, so we first head to russia, as described in the preceding chapter.
 
@@ -81,9 +79,9 @@ Move to the next chapter.
 
 ## DNS
 
-### Github Pages (free)
+### Github Pages (zero dollars)
 
-If you don't care about a URL ending in github.io, you can keep the default from the tutorial.
+If you don't care about a URL ending in github.io, you can keep the default from the tutorial. For example, the author's is http://lazzarello.github.io
 
 ### Custom DNS with name dot com (variable pricing)
 

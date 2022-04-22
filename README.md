@@ -42,10 +42,12 @@ Github is a platform used by software engineers to to develop code collaborative
 6. After a moment there should be a link to a URL where you can view this website, like, right now
 
 (optional) Add a custom domain name
-8. Add a domain (more on this in the DNS chapter) through Settings => Pages => Add a domain
-  1. Type a domain where you can read and write records.
-  2. Follow the instructions on the screen (depends on existing DNS hosting).
-  3. Click Verify. The warning that it may take 24 hours was not relevant for my first attempt. It took about 5 minutes.
+
+1. Add a domain (more on this in the DNS chapter) through Settings => Pages => Add a domain
+2. Type a domain where you can read and write records.
+3. Follow the instructions on the screen (depends on existing DNS hosting).
+4. Click Verify. The warning that it may take 24 hours was not relevant for my first attempt. It took about 5 minutes.
+ 
 [Read the docs for more info on how Pages work, if you're curious](https://docs.github.com/en/pages/quickstart)
 
 ### Squarespace (non-zero dollars)

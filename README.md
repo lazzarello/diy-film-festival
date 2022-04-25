@@ -26,7 +26,7 @@ This is where your website will live and where you can make changes to it. I rec
 
 ### Github Pages (zero dollars)
 
-Github is a platform used by software engineers to develop code collaboratively. It also can host websites, neat! Here's how to set one up. **jargon watch** *a repo* is what you are looking at right now. *forking a repo* is what you are about to do. It's a fancy way of making a copy with a reference back to the original.
+Github is a platform used by software engineers to develop code collaboratively. It also can host websites, neat! Here's how to set one up. **Jargon Watch:** *a repo* is what you are looking at right now. *forking a repo* is what you are about to do. It's a fancy way of making a copy with a reference back to the original.
 
 1. [Create an account on Github](https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home).
 2. [Fork this repository](https://github.com/lazzarello/diy-film-festival/fork) by clicking the icon that says fork.
@@ -94,12 +94,13 @@ It's very likely you're looking for a custom name. In case you aren't, the follo
 
 If you don't care about a URL ending in github.io, you can keep the default from the tutorial. For example, the author's is http://lazzarello.github.io
 
-Otherwise here's the process. It's not simple. follow along...
+Otherwise here's the process. I'm gonna talk about name.com because the author uses that website.
 
 ### Custom DNS with name dot com (variable pricing)
 
-Depending on the name you which to register and if it's available, this runs about $15 a year.
-Post the instructions from Github Pages for custom DNS.
+Depending on the name you which to register and if it's available, this runs about $15 a year for a dot com.
+
+[Post the instructions from Github Pages](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-a-subdomain) for custom DNS.
 
 ## Shout outs to
 
@@ -112,10 +113,3 @@ Post the instructions from Github Pages for custom DNS.
 * Unlimited Hangouts
 * Piss Hospital
 * Sicko Vision
-* 
-### Extra Credit
-
-https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
-Create an "apex domain" at your DNS provider if you want a URL like example.com to go to the same place as stream.example.com.
-Create the CNAME record to point to the Github Pages load balancer.
-Click the Enable TLS thing to do the encryption we all deserve

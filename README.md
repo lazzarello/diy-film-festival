@@ -66,7 +66,7 @@ Restream sits between OBS (the source) and the audience delivery. *For a conside
 
 At this point you should have the stream flowing. The final step is to update your website to display this stream. *TODO: how does cathode get a persistent URL from restream to ok.ru?*
 
-Edit the file named `index.html` in this repository so the link at the bottom where it says VIDEO STREAMING to match the numerical ID of the live broadcast on [ok.ru live page](https://ok.ru/video/myLives).
+Edit the file named `index.html` (by clicking on the filename and clicking the little pencil icon) in this repository so the link at the bottom where it says VIDEO STREAMING to match the numerical ID of the live broadcast on [ok.ru live page](https://ok.ru/video/myLives).
 
 ### Audience delivery with restream.io (100 dollars every month)
 

@@ -26,11 +26,11 @@ This is where your website will live and where you can make changes to it. I rec
 
 ### Github Pages (zero dollars)
 
-Github is a platform used by software engineers to develop code collaboratively. It also canhosts websites, neat! Here's how to set one up. **Jargon Watch:** *a repo* is what you are looking at right now. *forking a repo* is what you are about to do. It's a fancy way of making a copy with a reference back to the original.
+Github is a platform used by software engineers to develop code collaboratively. It also can host websites, neat! Here's how to set one up. **Jargon Watch:** *a repo* is what you are looking at right now. *forking a repo* is what you are about to do. It's a fancy way of making a copy with a reference back to the original.
 
 1. [Create an account on Github](https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home).
 2. [Fork this repository](https://github.com/lazzarello/diy-film-festival/fork) by clicking the icon that says fork.
-3. When you see a screen looking similar to this one again, click the little gear that says Settings.
+3. When you see a screen looking similar to this one, click the little gear that says Settings.
 5. In the left menu that says Code and automation, click Pages.
 6. Under Source, from the pulldown select `main` and click Save.
 7. After a moment there should be a link to a URL where you can view this website, like, right now. This DNS name will end in `github.io` which is something we can change later.
@@ -56,7 +56,7 @@ Ok dot ru is a Russian social network like Facebook. It has a live video streami
  
 ### Video proxy with Restream.io ( 4 hours a week for zero dollars )
 
-Restream sits between OBS (the source) and the audience delivery. For a considerably higher amount of money, it can also do audience delivery. More on that later. It makes it easy to add a single stream key to OBS in a set-it-and-forget-it way. After that it will rebroadcast (restream, get it?!) to a multitude of other popular platforms like Twitch and Facebook. We're not concerned about these platforms, so we first head to Russia, as described in the preceding chapter.
+Restream sits between OBS (the source) and the audience delivery. *For a considerably higher amount of money, it can also do audience delivery. More on that later.* It makes it easy to add a single stream key to OBS in a set-it-and-forget-it way. After that it will rebroadcast (restream, get it?!) to a multitude of other popular platforms like Twitch and Facebook. We're not concerned about these platforms, so we first head to Russia, as described in the preceding chapter.
 
 1. Create an [account on restream.io](https://restream.io/signup)
 2. Add the stream key to OBS.
@@ -123,6 +123,7 @@ If you don't care about a URL ending in github.io, you can keep the default from
 
 ## Shout outs to
 
+* EffieVision for CSS work
 * Spectacle Theater
 * CathodeTV
 * Fort90 Film Club

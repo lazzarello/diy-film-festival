@@ -120,6 +120,11 @@ If you don't care about a URL ending in github.io, you can keep the default from
 4. Click Verify. The warning that it may take 24 hours was not relevant for my first attempt. It took about 5 minutes.
  
 [Read the docs for more info on how DNS in Pages works, if you're curious](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages)
+### Does this sound too boring to you? 
+
+It's also possible to set all this up yourself on a self-hosted cloud platform. I got started myself on a Google Cloud Platform account I had previously set up with this tutorial. It's a straight forward process if you have the experience with Linux servers. The bandwidth cost is ~ US $30 a month for about 100 users at 1.4 mbit/s. lower bitrates could be cheaper and/or have higher user counts.
+
+https://www.digitalocean.com/community/tutorials/how-to-set-up-a-video-streaming-server-using-nginx-rtmp-on-ubuntu-20-04
 
 ## Shout outs to
 

@@ -1,23 +1,20 @@
 # custom backend notes from my computer
 
+## Ideal setup
 Source: OBS, authentication via token over TLS
-Transcoder/broadcast relay: ffmpeg (working as a one-to-many encoding proxy like restream.io)
+Transcoder/broadcast relay: also nginx. neat!
 Broadcast server: Nginx with RTMP module, authentication is IP based, which means the middle part is more important now
 
+## nginx broadcast infos
+
+https://obsproject.com/forum/resources/how-to-set-up-your-own-private-rtmp-server-using-nginx.50/
+
 Questions:
-  the proxy auth sounds important, how do we do that?
   Is authentication even important? probably if this is released to public viewers, regardless how unpopular they are
   
-sent source to server
-ffmpeg -re -i "VALIE-EXPORT_Syntagma_1983.mp4" -c:v copy -c:a aac -ar 44100 -ac 1 -f flv rtmp://35.209.252.86/live/stream
-ffmpeg -re -stream_loop -1 -i "VALIE-EXPORT_Syntagma_1983.mp4" -c:v copy -c:a aac -ar 44100 -ac 1 -f flv rtmp://35.209.252.86/live/stream
-
-File type based wildcards, not ideal
-
-make a playlist (escape characters?) and stream that playlist
-a playlist is a the word `file` followed by a path to a video file. if there are many with different codecs, ffmpeg will break when streaming to rtmp and the bitrate/codec changes
-
-ffmpeg -f concat -safe 0 -stream_loop -1 -i "playlist.txt" -c:v copy -c:a aac -ar 44100 -ac 1 -f flv rtmp://35.209.252.86/live/stream
+## OBS streaming
+set server to http://35.209.252.86/live
+stream key is the location after /live, so if it is "stream" the stream is at /live/stream
 
 playback source after configuring DASH and HLS
 http://35.209.252.86:8088/dash/stream.mpd
@@ -25,3 +22,22 @@ http://35.209.252.86:8088/hls/stream.m3u8
 
 streaming transcoding, which might be useful
 https://stackoverflow.com/questions/4556867/how-do-i-use-piping-with-ffmpeg
+
+## GCP compute engine settings
+
+Instance sizes
+  the oregon data center has some really small instances, they are impossible to upgrade but...
+  it's possible to use a medium size for setup, then stop and downgrade when nginx is doing it's thing.
+  the bottleneck seems to be disk I/O and CPU, which all this RTMP stuff uses little to none.
+  
+Network firewall tags:
+  http-server
+  https-server
+  rtmp-server
+  dash-hls
+  
+## network diagram
+
+using a proxy server, the full stack looks like this.
+
+![a network diagram of a proxy RTMP stream](network-diagram.png)

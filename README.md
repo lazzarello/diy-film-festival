@@ -84,7 +84,7 @@ Use the default restream.io stream destination
 * Add VLC Video Source under Sources, add files to the playlist.
 * Move to the next chapter.
 
-OBS is capable of a lot more but this isn't a tutorial to use OBS.
+OBS is capable of a lot more but this isn't a tutorial to use OBS. Some interesting plugins for the programmer types are obs-cli and obs-websocket
 
 ## Group Chat
 

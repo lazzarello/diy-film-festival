@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!--
+
+  hi friends!
+  just a little edit to restructure the cathode homepage as a
+  temporary fix for the current issue (mar 2022) of the chat
+  showing up beneath the video player.
+                                          xoxo://effie.vision/
+-->
+
+<!--
+
+  hello there,
+  for the time being, add real embedded URLs to the iframe sources for video and chat
+
+-->
+
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico"/> -->
+  <title>DIY Film Festival</title>
+</head>
+
+<body>
+  <style media="screen">
+    * {
+      box-sizing: border-box;
+    }
+
+    body,
+    html {
+      padding: 0;
+      margin: 0;
+      background-color: #000;
+      font-family: sans-serif;
+      color: #fff;
+    }
+
+    #topBar {
+      display: flex;
+      height: 69px;
+      margin: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #logoContainer, #mainLogoLink>img {
+      height: 100%;
+    }
+
+    #scheduleContainer {
+      position: absolute;
+      right: 20px;
+    }
+
+    #scheduleButton,
+    #scheduleButton:visited {
+      text-decoration: none;
+      background-color: #000;
+      color: #fff;
+      padding: .88em 1.4696em;
+      border: 3px solid #fff;
+      transition: all 0.25s;
+    }
+
+    #scheduleButton:hover,
+    #scheduleButton:visited:hover {
+      background-color: #fff;
+      color: #000;
+    }
+
+    #vidChatContainer {
+      display: flex;
+      height: 100vh !important;
+    }
+
+    #videoContainer {
+      flex-grow: 1;
+    }
+
+    #videoContainer>iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    #chatContainer>iframe {
+      width: 300px;
+      height: 100%;
+      border: none;
+    }
+
+    #bottomText {
+      margin: 20px;
+      font-size: 10px;
+      text-align: center;
+    }
+  </style>
+
+  <style>
+    video {
+      width: 942px;
+      height: 531px;
+    }
+  </style>
+  <div id="topBar">
+    <div id="logoContainer">
+      <a id="mainLogoLink" href="/" data-animation-role="header-element">
+        DIY Film Festival
+      </a>
+    </div>
+    <div id="scheduleContainer">
+      <a id="scheduleButton" href="#" target="_blank">SCHEDULE</a>
+    </div>
+  </div>
+
+
+  <div id="vidChatContainer">
+    <div id="videoContainer">
+      <!-- VIDEO STREAMING
+      <video id="videoPlayer" controls preload="auto"></video>
+      -->
+      <video data-dashjs-player autoplay controls preload="auto" src="http://35.209.252.86:8088/dash/stream.mpd"></video>
+    </div>
+    <!-- GROUPCHAT -->
+    <div id="chatContainer" class='embed-container'>
+      <iframe src='https://minnit.chat/' allowTransparency='true'></iframe>
+    </div>
+  </div>
+
+  <p id="bottomText">
+    DIY FILM FESTIVAL IS AN ARCHIVAL SCREENING ENTITY EXISTING FOR EDUCATIONAL PURPOSES ONLY.
+    <br>
+    VISIT OUR <a href="https://linktr.ee/" style="color: #da0960" target="_blank"> TREE OF LINKS </a> FOR MORE DIY FILM FESTIVAL.
+  </p>
+  <script src="http://cdn.dashjs.org/latest/dash.all.min.js" ></script>
+  <!-- explicit constructor
+  <script>
+    (function(){
+      var url = "http://35.209.252.86:8088/dash/stream.mpd";
+      var player = dashjs.MediaPlayer().create();
+      player.initialize(document.querySelector("#videoPlayer"), url, true);
+    })();
+  </script>
+  -->
+</body>
+
+</html>
+
+<!-- (groove)(dance)(groove) -->

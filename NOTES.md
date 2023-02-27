@@ -17,8 +17,7 @@ All files must be the same codec and if they are not the same duration, it must 
 
 I broke DASH but only for...the DASH reference player in my demo code and have no idea why.
 VideoJS looks like a dece player for HLS.
-https://videojs.com/guides
-
+https://videojs.com/guides and the [live streaming](https://github.com/videojs/http-streaming) script looks like it's all we need
 Apple is evil but hey, I guess we're using HLS. DASH "doesn't work" on apple software like iOS. Cloudflare could be a start for the "do I need a CDN?" question.
 
 https://www.cloudflare.com/learning/video/what-is-mpeg-dash/

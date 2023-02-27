@@ -30,12 +30,13 @@ http {
        include /etc/nginx/sites-enabled/*;
 
        # send HLS and DASH sources to port 8088 for clients to pick up
-       # TODO: this could probs be only over localhost, enabled for all in GCP firewall config
        server {
                listen 8088;
 
                location / {
+                       add_header Cache-Control no-cache;
                        add_header Access-Control-Allow-Origin *;
+                       # add_header Access-Control-Allow-Origin http://streaming.teamnerds.cool;
                        root /var/www/html/stream;
                }
        }
@@ -50,6 +51,7 @@ rtmp {
                chunk_size 4096;
                allow publish 127.0.0.1;
                allow publish 10.138.0.8;
+               deny publish all;
 
                application live {
                        live on;
@@ -60,6 +62,8 @@ rtmp {
                        hls_playlist_length 60;
 
                        dash on;
+                       dash_fragment 3;
+                       dash_playlist_length 60;
                        dash_path /var/www/html/stream/dash;
                }
        }

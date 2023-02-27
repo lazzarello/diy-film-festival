@@ -4,63 +4,63 @@ pid /run/nginx.pid;
 include /etc/nginx/modules-enabled/*.conf;
 
 events {
-        worker_connections 768;
+       worker_connections 768;
 }
 
 http {
 
-        sendfile on;
-        tcp_nopush on;
-        tcp_nodelay on;
-        keepalive_timeout 65;
-        types_hash_max_size 2048;
+       sendfile on;
+       tcp_nopush on;
+       tcp_nodelay on;
+       keepalive_timeout 65;
+       types_hash_max_size 2048;
 
-        include /etc/nginx/mime.types;
-        default_type application/octet-stream;
+       include /etc/nginx/mime.types;
+       default_type application/octet-stream;
 
-        ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3; # Dropping SSLv3, ref: POODLE
-        ssl_prefer_server_ciphers on;
+       ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3; # Dropping SSLv3, ref: POODLE
+       ssl_prefer_server_ciphers on;
 
-        access_log /var/log/nginx/access.log;
-        error_log /var/log/nginx/error.log;
+       access_log /var/log/nginx/access.log;
+       error_log /var/log/nginx/error.log;
 
-        gzip on;
+       gzip on;
 
-        include /etc/nginx/conf.d/*.conf;
-        include /etc/nginx/sites-enabled/*;
+       include /etc/nginx/conf.d/*.conf;
+       include /etc/nginx/sites-enabled/*;
 
-        # send HLS and DASH sources to port 8088 for clients to pick up
-        # TODO: this could probs be only over localhost, enabled for all in GCP firewall config
-        server {
-                listen 8088;
+       # send HLS and DASH sources to port 8088 for clients to pick up
+       # TODO: this could probs be only over localhost, enabled for all in GCP firewall config
+       server {
+               listen 8088;
 
-                location / {
-                        add_header Access-Control-Allow-Origin *;
-                        root /var/www/html/stream;
-                }
-        }
+               location / {
+                       add_header Access-Control-Allow-Origin *;
+                       root /var/www/html/stream;
+               }
+       }
 
-        types {
-                application/dash+xml mpd;
-        }
+       types {
+               application/dash+xml mpd;
+       }
 }
 rtmp {
-        server {
-                listen 1935;
-                chunk_size 4096;
-                allow publish 127.0.0.1;
-                allow publish 10.138.0.8;
+       server {
+               listen 1935;
+               chunk_size 4096;
+               allow publish 127.0.0.1;
+               allow publish 10.138.0.8;
 
-                application live {
-                        live on;
-                        record off;
-                        hls on;
-                        hls_path /var/www/html/stream/hls;
-                        hls_fragment 3;
-                        hls_playlist_length 60;
+               application live {
+                       live on;
+                       record off;
+                       hls on;
+                       hls_path /var/www/html/stream/hls;
+                       hls_fragment 3;
+                       hls_playlist_length 60;
 
-                        dash on;
-                        dash_path /var/www/html/stream/dash;
-                }
-        }
+                       dash on;
+                       dash_path /var/www/html/stream/dash;
+               }
+       }
 }

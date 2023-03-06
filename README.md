@@ -122,20 +122,33 @@ If you don't care about a URL ending in github.io, you can keep the default from
 [Read the docs for more info on how DNS in Pages works, if you're curious](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages)
 ### Does this sound too boring to you? 
 
-It's also possible to set all this up yourself on a self-hosted cloud platform. I got started myself on a Google Cloud Platform account I had previously set up with this tutorial. It's a straight forward process if you have the experience with Linux servers. The bandwidth cost is ~ US $30 a month for about 100 users at 1.4 mbit/s. lower bitrates could be cheaper and/or have higher user counts.
+It's also possible to set all this up yourself on a self-hosted cloud platform. Read more about it in the BACKEND and NOTES files. I got started myself on a Google Cloud Platform account I had previously set up with this tutorial. It's a straight forward process if you have the experience with Linux servers. The bandwidth cost is ~ US $30 a month for about 100 users at 1.4 mbit/s. lower bitrates could be cheaper and/or have higher user counts.
 
 https://www.digitalocean.com/community/tutorials/how-to-set-up-a-video-streaming-server-using-nginx-rtmp-on-ubuntu-20-04
 
 ## Shout outs to
 
-* EffieVision for CSS work
+* EffieVision
 * Spectacle Theater
 * CathodeTV
 * Fort90 Film Club
 * Museum of Home Video
 * Effed Up Film Heads
-* Moviepass
+* Hollywood Entertainment (fka Moviepass)
 * Miss Molly Rogers
 * Unlimited Hangouts
 * Piss Hospital
 * Sicko Vision
+* BGCozyCave
+
+## TODO
+
+[*] ~~Cloud automation to manage the instances nginx configuration~~
+[*] ~~DNS for broadcast server IP~~
+[ ] DASH is either broken or shouldn't be used
+[ ] Cloud automation to create the instances and associated infrastructure
+[ ] javascript Player is basically just the defaults
+[ ] remote control OBS with fancy web UI
+[ ] Add some stream token authentication system so randos online can't play the stream. Or not...
+[ ] SSL via Let's Encrypt
+[ ] client scaling via load balancer or CDN

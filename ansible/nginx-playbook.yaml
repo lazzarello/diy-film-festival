@@ -1,0 +1,58 @@
+---
+- name: "configure an nginx streaming broadcast server"
+  become: yes
+  hosts: 
+    - all
+  tasks:
+    - name: "install nginx stuff"
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - libnginx-mod-rtmp
+        - nginx
+      tags:
+        - streaming-broadcast
+        - streaming-relay
+    - name: "make streaming directory"
+      file:
+        state: directory
+        path: /var/www/html/stream
+        mode: '755'
+      tags:
+        - streaming-broadcast
+    - name: "install video nginx configuration"
+      template:
+        src: nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+      tags:
+        - streaming-broadcast
+      notify:
+      - restart nginx
+    - name: "install video relay nginx configuration"
+      template:
+        src: nginx-relay.conf.j2
+        dest: /etc/nginx/nginx.conf
+      tags:
+        - streaming-relay
+      notify:
+      - restart nginx
+    - name: "install default nginx server"
+      template:
+        src: nginx-default.conf.j2
+        dest: /etc/nginx/sites-available/default
+      tags:
+        - streaming-broadcast
+      notify:
+      - restart nginx
+    - name: "make default www page"
+      template:
+        src: index-custom-backend.html.j2
+        dest: /var/www/html/index.html
+      tags:
+        - streaming-broadcast
+  handlers:
+    - name: "restart nginx"
+      service:
+        name: nginx
+        state: restarted

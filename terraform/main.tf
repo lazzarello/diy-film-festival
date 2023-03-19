@@ -27,6 +27,28 @@ resource "google_compute_subnetwork" "default" {
   network       = google_compute_network.vpc_network.id
 }
 
+resource "google_compute_address" "streaming_relay" {
+  address_type = "EXTERNAL"
+  description  = "The source proxy for streams"
+  name         = "streaming-relay"
+  network_tier = "STANDARD"
+}
+
+resource "google_compute_address" "streaming_broadcast" {
+  address_type = "EXTERNAL"
+  description  = "the single broadcast endpoint that serves DASH/HLS"
+  name         = "streaming-broadcast"
+  network_tier = "STANDARD"
+}
+
+resource "google_dns_managed_zone" "legalcontent" {
+  description   = "live streaming legal content"
+  dns_name      = "legalcontent.live."
+  force_destroy = false
+  name          = "legalcontent"
+  visibility    = "public"
+}
+
 resource "google_compute_instance" "streaming_relay" {
   boot_disk {
     auto_delete = true
@@ -51,7 +73,7 @@ resource "google_compute_instance" "streaming_relay" {
 
   network_interface {
     access_config {
-      # nat_ip       = "35.212.191.148"
+      nat_ip       = google_compute_address.streaming_relay.address
       network_tier = "STANDARD"
     }
 
@@ -103,7 +125,7 @@ resource "google_compute_instance" "streaming_broadcast" {
 
   network_interface {
     access_config {
-      # nat_ip       = "35.209.20.154"
+      nat_ip       = google_compute_address.streaming_broadcast.address
       network_tier = "STANDARD"
     }
 
@@ -130,6 +152,52 @@ resource "google_compute_instance" "streaming_broadcast" {
 
   tags = ["dash-hls", "http-server", "https-server", "rtmp-server"]
 }
+
+resource "google_compute_firewall" "rtmp_server" {
+  allow {
+    ports    = ["1935"]
+    protocol = "tcp"
+  }
+
+  description   = "Allow incoming RTMP from all, passing IP based authentication to nginx configuration for static IP accept lists"
+  direction     = "INGRESS"
+  name          = "rtmp-server"
+  network = google_compute_network.vpc_network.id
+  priority      = 1000
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["rtmp-server"]
+}
+
+resource "google_compute_firewall" "owncast" {
+  allow {
+    ports    = ["8080"]
+    protocol = "tcp"
+  }
+
+  description   = "tcp port 8080"
+  direction     = "INGRESS"
+  name          = "owncast"
+  network = google_compute_network.vpc_network.id
+  priority      = 1000
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["owncast"]
+}
+
+resource "google_compute_firewall" "dash_hls" {
+  allow {
+    ports    = ["8088"]
+    protocol = "tcp"
+  }
+
+  description   = "Allow inbound DASH and HLS clients to receive video from this server"
+  direction     = "INGRESS"
+  name          = "dash-hls"
+  network = google_compute_network.vpc_network.id
+  priority      = 1000
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["dash-hls"]
+}
+
 
 /*
 resource "google_compute_instance" "default" {

@@ -50,7 +50,7 @@ resource "google_dns_managed_zone" "legalcontent" {
 }
 
 resource "google_dns_record_set" "streaming_broadcast" {
-  name = "streaming_broadcast.${google_dns_managed_zone.legalcontent.dns_name}"
+  name = "streaming.${google_dns_managed_zone.legalcontent.dns_name}"
   type = "A"
   ttl  = 300
 

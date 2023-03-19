@@ -49,6 +49,16 @@ resource "google_dns_managed_zone" "legalcontent" {
   visibility    = "public"
 }
 
+resource "google_dns_record_set" "streaming_broadcast" {
+  name = "streaming_broadcast.${google_dns_managed_zone.legalcontent.dns_name}"
+  type = "A"
+  ttl  = 300
+
+  managed_zone = google_dns_managed_zone.legalcontent.name
+
+  rrdatas = [google_compute_instance.streaming_broadcast.network_interface[0].access_config[0].nat_ip]
+}
+
 resource "google_compute_instance" "streaming_relay" {
   boot_disk {
     auto_delete = true
@@ -97,7 +107,7 @@ resource "google_compute_instance" "streaming_relay" {
     enable_vtpm                 = true
   }
 
-  tags = ["http-server", "rtmp-server"]
+  tags = ["ssh", "http-server", "rtmp-server"]
   zone = "us-west1-b"
 }
 
@@ -150,7 +160,7 @@ resource "google_compute_instance" "streaming_broadcast" {
     enable_vtpm                 = true
   }
 
-  tags = ["dash-hls", "http-server", "https-server", "rtmp-server"]
+  tags = ["ssh", "dash-hls", "http-server", "https-server", "rtmp-server"]
 }
 
 resource "google_compute_firewall" "rtmp_server" {
@@ -198,6 +208,18 @@ resource "google_compute_firewall" "dash_hls" {
   target_tags   = ["dash-hls"]
 }
 
+resource "google_compute_firewall" "ssh" {
+  name = "allow-ssh"
+  allow {
+    ports = ["22"]
+    protocol = "tcp"
+  }
+  direction = "INGRESS"
+  network = google_compute_network.vpc_network.id
+  priority = 1000
+  source_ranges = ["0.0.0.0/0"]
+  target_tags = ["ssh"]
+}
 
 /*
 resource "google_compute_instance" "default" {
@@ -219,19 +241,6 @@ resource "google_compute_instance" "default" {
       # a comment
     }
   }
-}
-
-resource "google_compute_firewall" "ssh" {
-  name = "allow-ssh"
-  allow {
-    ports = ["22"]
-    protocol = "tcp"
-  }
-  direction = "INGRESS"
-  network = google_compute_network.vpc_network.id
-  priority = 1000
-  source_ranges = ["0.0.0.0/0"]
-  target_tags = ["ssh"]
 }
 
 resource "google_compute_firewall" "flask" {

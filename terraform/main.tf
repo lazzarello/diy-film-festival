@@ -221,29 +221,18 @@ resource "google_compute_firewall" "ssh" {
   target_tags = ["ssh"]
 }
 
-/*
-resource "google_compute_instance" "default" {
-  name = "flask-vm"
-  machine_type = "f1-micro"
-  tags = ["ssh"]
-
-  boot_disk {
-    initialize_params {
-        image = "debian-cloud/debian-11"
+resource "local_file" "hosts_cfg" {
+  content = templatefile("${path.module}/templates/hosts.tpl",
+    {
+      streaming_broadcast_public = google_compute_instance.streaming_broadcast.network_interface.0.access_config.0.nat_ip
+      streaming_relay_public = google_compute_instance.streaming_relay.network_interface.0.access_config.0.nat_ip
+      streaming_broadcast_private = google_compute_instance.streaming_broadcast.network_interface.0.network_ip
+      streaming_relay_private = google_compute_instance.streaming_broadcast.network_interface.0.network_ip
     }
-  }
-
-  metadata_startup_script = "sudo apt-get update; sudo apt-get install -yq build-essential python3-pip rsync; pip install flask"
-
-  network_interface {
-    subnetwork = google_compute_subnetwork.default.id
-    access_config {
-      # a comment
-    }
-  }
+  )
+  filename = "../ansible/hosts.cfg"
 }
-*/
-// A variable for extracting the external IP address of the VM
+
 output "broadcast-server-test-URL" {
  value = join("",["http://",google_compute_instance.streaming_broadcast.network_interface.0.access_config.0.nat_ip,":8088"])
 }

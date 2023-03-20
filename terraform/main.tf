@@ -87,7 +87,7 @@ resource "google_compute_instance" "streaming_relay" {
       network_tier = "STANDARD"
     }
 
-    # network_ip         = "10.138.0.8"
+    network_ip         = "10.0.1.8"
     stack_type = "IPV4_ONLY"
     subnetwork = google_compute_subnetwork.default.id
   }
@@ -139,7 +139,7 @@ resource "google_compute_instance" "streaming_broadcast" {
       network_tier = "STANDARD"
     }
 
-    # network_ip         = "10.128.0.2"
+    network_ip         = "10.0.1.9"
     nic_type           = "GVNIC"
     stack_type         = "IPV4_ONLY"
     subnetwork = google_compute_subnetwork.default.id
@@ -242,20 +242,16 @@ resource "google_compute_instance" "default" {
     }
   }
 }
-
-resource "google_compute_firewall" "flask" {
-  name    = "flask-app-firewall"
-  network = google_compute_network.vpc_network.id
-
-  allow {
-    protocol = "tcp"
-    ports    = ["5000"]
-  }
-  source_ranges = ["0.0.0.0/0"]
-}
-
-// A variable for extracting the external IP address of the VM
-output "Web-server-URL" {
- value = join("",["http://",google_compute_instance.default.network_interface.0.access_config.0.nat_ip,":5000"])
-}
 */
+// A variable for extracting the external IP address of the VM
+output "broadcast-server-test-URL" {
+ value = join("",["http://",google_compute_instance.streaming_broadcast.network_interface.0.access_config.0.nat_ip,":8088"])
+}
+
+output "broadcast-server-SSH" {
+ value = join("",["ssh lazzarello@",google_compute_instance.streaming_broadcast.network_interface.0.access_config.0.nat_ip,])
+}
+
+output "broadcast-relay-SSH" {
+ value = join("",["ssh lazzarello@",google_compute_instance.streaming_relay.network_interface.0.access_config.0.nat_ip,])
+}

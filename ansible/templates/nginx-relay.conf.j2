@@ -34,12 +34,14 @@ rtmp {
                listen 1935;
                chunk_size 4096;
                allow publish 127.0.0.1;
-               allow publish 52.119.112.230;
+               allow publish {{ obs_source_address }};
+               deny publish all;
 
                application live {
                        live on;
                        record off;
-                       push rtmp://10.128.0.2/live/stream;
+                       # https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_vars_facts.html
+                       push rtmp://{{ hostvars["streaming_broadcast"]["internal_ip"] }}/live/stream;
                }
        }
 }

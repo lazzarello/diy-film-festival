@@ -47,10 +47,10 @@ http {
 }
 rtmp {
        server {
-               listen 1935;
+               listen {{ broadcast_rtmp_nginx }};
                chunk_size 4096;
                allow publish 127.0.0.1;
-               allow publish 10.138.0.8;
+               allow publish {{ hostvars["streaming_relay"]["ansible_host"] }};
                deny publish all;
 
                application live {

@@ -8,7 +8,7 @@ internal_ip=${streaming_broadcast_private}
 internal_ip=${streaming_relay_private}
 
 [streaming_broadcast]
-${streaming_broadcast_public}
+streaming_broadcast ansible_host=${streaming_broadcast_public}
 
 [streaming_relay]
-${streaming_relay_public}
+streaming_relay ansible_host=${streaming_relay_public}

@@ -163,6 +163,34 @@ resource "google_compute_instance" "streaming_broadcast" {
   tags = ["ssh", "dash-hls", "http-server", "https-server", "rtmp-server"]
 }
 
+resource "google_compute_firewall" "default_allow_http" {
+  allow {
+    ports    = ["80"]
+    protocol = "tcp"
+  }
+
+  direction     = "INGRESS"
+  name          = "default-allow-http"
+  network = google_compute_network.vpc_network.id
+  priority      = 1000
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["http-server"]
+}
+
+resource "google_compute_firewall" "default_allow_https" {
+  allow {
+    ports    = ["443"]
+    protocol = "tcp"
+  }
+
+  direction     = "INGRESS"
+  name          = "default-allow-https"
+  network = google_compute_network.vpc_network.id
+  priority      = 1000
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["https-server"]
+}
+
 resource "google_compute_firewall" "rtmp_server" {
   allow {
     ports    = ["1935"]

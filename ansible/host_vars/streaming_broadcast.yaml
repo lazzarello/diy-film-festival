@@ -1,0 +1,3 @@
+owncast_systemd_user: root
+owncast_systemd_group: root
+owncast_directory: /usr/local

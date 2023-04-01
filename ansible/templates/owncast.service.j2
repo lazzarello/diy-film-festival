@@ -1,0 +1,12 @@
+[Unit]
+Description=Owncast
+[Service]
+Type=simple
+User={{ owncast_systemd_user }}
+Group={{ owncast_systemd_group }}
+WorkingDirectory={{ owncast_directory}}
+ExecStart={{ owncast_directory}}/owncast
+Restart=on-failure
+RestartSec=5
+[Install]
+WantedBy=multi-user.target

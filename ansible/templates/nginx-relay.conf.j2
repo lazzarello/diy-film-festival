@@ -31,7 +31,7 @@ http {
 }
 rtmp {
        server {
-               listen 1935;
+               listen {{ relay_rtmp_port }};
                chunk_size 4096;
                allow publish 127.0.0.1;
                allow publish {{ obs_source_address }};

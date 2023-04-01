@@ -12,7 +12,7 @@ provider "google" {
 
   project = "legal-content-381103"
   region  = "us-west1"
-  zone    = "us-west1-b"
+  zone    = "us-west1-c"
 }
 
 resource "google_compute_network" "vpc_network" {
@@ -108,7 +108,6 @@ resource "google_compute_instance" "streaming_relay" {
   }
 
   tags = ["ssh", "http-server", "rtmp-server"]
-  zone = "us-west1-b"
 }
 
 resource "google_compute_instance" "streaming_broadcast" {
@@ -255,7 +254,7 @@ resource "local_file" "hosts_cfg" {
       streaming_broadcast_public = google_compute_instance.streaming_broadcast.network_interface.0.access_config.0.nat_ip
       streaming_relay_public = google_compute_instance.streaming_relay.network_interface.0.access_config.0.nat_ip
       streaming_broadcast_private = google_compute_instance.streaming_broadcast.network_interface.0.network_ip
-      streaming_relay_private = google_compute_instance.streaming_broadcast.network_interface.0.network_ip
+      streaming_relay_private = google_compute_instance.streaming_relay.network_interface.0.network_ip
     }
   )
   filename = "../ansible/hosts.cfg"

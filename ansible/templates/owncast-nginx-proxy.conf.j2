@@ -1,7 +1,10 @@
 server {
+        # logic to enable this block before the cert is issued
+        {% if letsencrypt_challenge_accepted == false %}
         listen [::]:80 ipv6only=on;
         listen 80;
-        server_name streaming.legalcontent.live;
+        {% endif %}
+        server_name {{ domain_name }};
         root /var/www/html;
 
         # Add index.php to the list if you are using PHP
@@ -29,4 +32,29 @@ server {
                 root /var/www/html;
                 try_files $uri $uri/ =404;
          }
+
+      {% if letsencrypt_challenge_accepted == true %}
+        listen [::]:443 ssl ipv6only=on; 
+        listen 443 ssl;
+        ssl_certificate /etc/letsencrypt/certs/fullchain_{{ domain_name }}; 
+        ssl_certificate_key /etc/letsencrypt/keys/{{ domain_name }}.key; 
+        # why does certbot include this? why should I too?
+        # include /etc/letsencrypt/options-ssl-nginx.conf;
+        # ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+      {% endif %}
 }
+
+{% if letsencrypt_challenge_accepted == true %}
+server {
+    if ($host = {{ domain_name }}) {
+        return 301 https://$host$request_uri;
+    } 
+
+
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        server_name {{ domain_name }};
+    return 404;
+}
+{% endif %}

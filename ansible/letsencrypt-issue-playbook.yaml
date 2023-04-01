@@ -50,6 +50,11 @@
         group: root
         mode: u=rwx,g=rx,o=rx
 
+    - name: "debug challenge"
+      debug:
+        msg: "acme_challenge_streaming_legalcontent_live value is {{ acme_challenge_streaming_legalcontent_live }}"
+
+    # this fails if there's a certificate already registered, add a check.
     - name: "Implement http-01 challenge files"
       copy:
         content: "{{ acme_challenge_streaming_legalcontent_live['challenge_data'][item]['http-01']['resource_value'] }}"
@@ -72,3 +77,22 @@
         chain_dest: "{{ letsencrypt_certs_dir }}/chain_{{ domain_name }}.crt"
         fullchain_dest: "{{ letsencrypt_certs_dir }}/fullchain_{{ domain_name }}"
         data: "{{ acme_challenge_streaming_legalcontent_live }}"
+      register: letsencrypt_challenge_accepted
+
+    - name: "save acme challenge acceptance"
+      set_fact:
+        letsencrypt_challenge_accepted: true
+      delegate_to: streaming_broadcast
+      run_once: true
+
+    - name: "write nginx config for HTTPS"
+      template:
+        src: owncast-nginx-proxy.conf.j2
+        dest: /etc/nginx/sites-enabled/default
+      notify:
+      - restart nginx
+  handlers:
+    - name: "restart nginx"
+      service:
+        name: nginx
+        state: restarted

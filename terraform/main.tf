@@ -59,6 +59,16 @@ resource "google_dns_record_set" "streaming_broadcast" {
   rrdatas = [google_compute_instance.streaming_broadcast.network_interface[0].access_config[0].nat_ip]
 }
 
+resource "google_dns_record_set" "streaming_relay" {
+  name = "relay.${google_dns_managed_zone.legalcontent.dns_name}"
+  type = "A"
+  ttl  = 300
+
+  managed_zone = google_dns_managed_zone.legalcontent.name
+
+  rrdatas = [google_compute_instance.streaming_relay.network_interface[0].access_config[0].nat_ip]
+}
+
 resource "google_compute_instance" "streaming_relay" {
   boot_disk {
     auto_delete = true
@@ -73,7 +83,7 @@ resource "google_compute_instance" "streaming_relay" {
     mode = "READ_WRITE"
   }
 
-  machine_type = "e2-micro"
+  machine_type = "e2-small"
 
   metadata = {
     ssh-keys = "lazzarello:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDO/c2/SsCsz3jqgoM57p9lGYDMldkn9BZwjJboM42rmC2cc35T+atKLK0w4IZGgYq5z6SeTuvi17luJt2m4+LBkBDtfWPlqDUmZb0qqrCPcRV39+AEj6pKY+4M3zTYrNvF8NqJ1bkjhX4sn4X6vtzpjKKbwVvhX4mGnevja0pMEZfkMqAbm38mIgcHXnYhpb+Sdyt6Yrbw8WD0Fja4Qf6NngJVvTa6l6WwLiCE6DCkfTuwZZT2SlL5/zwLnj9mTHOnDWo6XrdEUFJtjXhoipwAeFVemmWStQDFK/CVWlTwvRfcKWAXxLu+tsXMK6LpNG0aoEyCmbMV4TLPBmgY/hy+er3f1E9PWDDILeuy7aRJIAK6atF8P+4DeZjobdiGdPMHxglo9S0ux6p/ER1hbjFEM0elJeYSEqMR6VoVTfzMxXQqVHhgIfqXXWsDh/8ivFUZVoH4yCm1b04yNOHlPl3TsFxCDvtsCcWyUc23Yqi5uZNYHIMw2iX8TCr8lj5Vh7cs5TvPTBJYTjBOASDx1CWMsZQWp2KbNw5by0dsSWDeNtX1uqqajEf1pNtoh4s38Ji7aUUujZTWuydHA085JvLAi3lkkLrm1oSPLusad9DLZKRy/D69LIQnmdrDXV4U9Sm2uJFHwiIw29CSXKaH3k7l3BiaFFh07oVrh0YdHkO31w== lazzarello@strop.local"

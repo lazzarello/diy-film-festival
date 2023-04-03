@@ -53,7 +53,7 @@ rtmp {
                listen {{ broadcast_rtmp_port }};
                chunk_size 4096;
                allow publish 127.0.0.1;
-               allow publish {{ hostvars["streaming_relay"]["ansible_host"] }};
+               allow publish {{ hostvars["streaming_relay"]["internal_ip"] }};
                deny publish all;
 
                application live {

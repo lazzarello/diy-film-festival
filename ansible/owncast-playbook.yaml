@@ -30,6 +30,11 @@
         dest: /etc/systemd/system/owncast.service
       notify:
       - restart owncast
+    - name: "enable owncast systemd unit"
+      systemd:
+        name: owncast.service
+        enabled: yes
+        state: started
   handlers:
     - name: "restart nginx"
       service:
@@ -40,3 +45,4 @@
         name: owncast
         state: restarted
         daemon_reload: true
+        enabled: yes

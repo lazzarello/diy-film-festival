@@ -1,0 +1,4 @@
+broadcast_rtmp_port: 1936
+relay_rtmp_port: 1935
+owncast_rtmp_port: 1935
+obs_source_address: 52.119.112.230

@@ -143,12 +143,17 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-a-video-streaming
 
 ## TODO
 
+[ ] debug that weird problem where the transport stream in the playlist would end in `.t` and break the CORS policy, then with no intervention of my own changed to `.ts` which applys the CORS defined in the plugin
 [*] ~~Cloud automation to manage the instances nginx configuration~~
 [*] ~~DNS for broadcast server IP~~
-[ ] DASH is either broken or shouldn't be used
+[*] DASH is either broken or shouldn't be used
 [ ] Cloud automation to create the instances and associated infrastructure
-[ ] javascript Player is basically just the defaults
+[*] javascript Player is basically just the defaults
+[ ] output rtmp stats via nginx plugin
+[ ] log rtmp access/error
 [ ] remote control OBS with fancy web UI
 [ ] Add some stream token authentication system so randos online can't play the stream. Or not...
 [ ] SSL via Let's Encrypt
 [ ] client scaling via load balancer or CDN
+  [ ] fastly
+  [ ] cloudflare

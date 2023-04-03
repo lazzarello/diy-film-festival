@@ -1,3 +1,0 @@
-[all]
-streaming-relay ansible_host=35.212.191.148 ansible_user=lazzarello
-streaming-broadcast ansible_host=35.209.20.154 ansible_user=lazzarello

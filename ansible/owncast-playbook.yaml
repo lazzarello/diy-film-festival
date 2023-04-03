@@ -1,0 +1,48 @@
+---
+- name: "configure an owncast streaming broadcast server"
+  become: yes
+  hosts: 
+    - streaming_broadcast
+  tasks:
+    - name: "install deps"
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - unzip
+        - golang-1.14
+        - ffmpeg
+    - name: "installing owncast"
+      ansible.builtin.unarchive:
+        remote_src: yes
+        src: https://github.com/owncast/owncast/releases/download/v0.0.13/owncast-0.0.13-linux-64bit.zip
+        dest: "{{ owncast_directory }}"
+        mode: 0755
+    - name: "configure owncast reverse proxy"
+      template:
+        src: owncast-nginx-proxy.conf.j2
+        dest: /etc/nginx/sites-enabled/default
+      notify:
+      - restart nginx
+    - name: "add systemd unit file for owncast"
+      template:
+        src: owncast.service.j2
+        dest: /etc/systemd/system/owncast.service
+      notify:
+      - restart owncast
+    - name: "enable owncast systemd unit"
+      systemd:
+        name: owncast.service
+        enabled: yes
+        state: started
+  handlers:
+    - name: "restart nginx"
+      service:
+        name: nginx
+        state: restarted
+    - name: "restart owncast"
+      systemd:
+        name: owncast
+        state: restarted
+        daemon_reload: true
+        enabled: yes

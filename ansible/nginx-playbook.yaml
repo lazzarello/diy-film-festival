@@ -8,6 +8,7 @@
       apt:
         name: "{{ item }}"
         state: present
+        update_cache: true
       with_items:
         - libnginx-mod-rtmp
         - nginx
@@ -45,12 +46,6 @@
         - streaming-broadcast
       notify:
       - restart nginx
-    - name: "make default www page"
-      template:
-        src: index-custom-backend.html.j2
-        dest: /var/www/html/index.html
-      tags:
-        - streaming-broadcast
   handlers:
     - name: "restart nginx"
       service:

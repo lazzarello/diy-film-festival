@@ -54,6 +54,7 @@ rtmp {
                chunk_size 4096;
                allow publish 127.0.0.1;
                allow publish {{ hostvars["streaming_relay"]["internal_ip"] }};
+               allow publish 0.0.0.0
                deny publish all;
 
                application live {

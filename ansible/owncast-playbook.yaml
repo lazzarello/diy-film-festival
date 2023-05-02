@@ -10,7 +10,8 @@
         state: present
       with_items:
         - unzip
-        - golang-1.14
+        - nginx
+        - golang
         - ffmpeg
     - name: "installing owncast"
       ansible.builtin.unarchive:

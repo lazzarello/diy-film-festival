@@ -1,0 +1,36 @@
+# Full pipeline
+[OBS => Monkeybrains] => [GCP => Relay] => [GCP => Broadcast pull => ffmpeg push => owncast]
+Viewer Playback 47471 kb/s
+Viewer latency 35 seconds
+Video mode: passthrough
+Measured audio latency: 40 seconds
+
+# Relay push to Owncast
+[OBS => Monkeybrains] => [GCP => Relay push] => [GCP => Owncast]
+Viewer Playback: 45287 kb/s
+Viewer latency: 36 seconds
+Video mode: passthrough
+Measured audio latency: 40 seconds
+
+# OBS to Owncast
+[OBS => Monkeybrains] =>  [GCP => owncast]
+Viewer Playback: 10408 kb/s
+Viewer latency: seconds
+Video mode: passthrough
+Measured audio latency: 73 seconds
+
+# OBS to Owncast localhost
+[OBS => owncast]
+Viewer Playback:  kb/s
+Viewer latency: seconds
+Video mode: passthrough
+Measured audio latency:  seconds
+
+# OBS to Owncast
+[OBS => Monkeybrains] =>  [GCP => owncast]
+Viewer Playback: 9506 kb/s
+Viewer latency: 4 seconds
+Video mode: 1200@720 transcoding "low CPU"
+Measured audio latency:  7 seconds
+
+rtmp://relay.legalcontent.live/6b3a55e0261b0304143f805a24924d0c1c44524821305f31d9277843b8a10f4e/ubuweb
